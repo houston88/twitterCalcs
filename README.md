@@ -3,7 +3,7 @@ twitterCalcs
 
 Parse tweets and save results in mongo.
 
-## Pre-Requisites to Install:
+## Pre-Requisites to Run:
 
  * oauth2
  * pymongo
