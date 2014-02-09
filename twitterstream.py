@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import oauth2 as oauth
 import urllib2 as urllib
 
