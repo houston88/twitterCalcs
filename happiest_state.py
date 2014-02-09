@@ -6,6 +6,8 @@ Created on May 13, 2013
 import sys
 import string
 import json
+import datetime
+from pymongo import MongoClient
 
 def main():
     afinnfile = open(sys.argv[1])
@@ -187,6 +189,11 @@ def main():
     # lets try and print out 10 happiest states in order, in json
     count = 1
     happyState = {}
+    
+    # set date and filename used, remove str when going straight to mongo
+    happyState['parseDate'] = datetime.datetime.today()
+    happyState['fileName'] = sys.argv[2]
+    
     for w in sorted(state_hapiness, key=state_hapiness.get, reverse=True):
         print w, float(state_hapiness[w])
         
@@ -206,9 +213,15 @@ def main():
         #if count > 10:
         #    break
 
-    with open('happiest_states.json', 'w') as outfile:
-      json.dump(happyState, outfile)
+    #with open('happiest_states.json', 'w') as outfile:
+    #  json.dump(happyState, outfile)
     
+    # insert into local mongo
+    client = MongoClient('localhost', 27017)
+    db = client.twit_data
+    sCol = db.happiest_states
+    rec_id = sCol.insert(happyState)
+    print 'Inserted into mongo, id: ' + str(rec_id)
             
 
 if __name__ == '__main__':
