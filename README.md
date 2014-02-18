@@ -7,3 +7,10 @@ Parse tweets and save results in mongo.
 
  * oauth2
  * pymongo
+
+## To install these packages on ubuntu:
+
+ * apt-get install python-pip
+ * pip install oauth2
+ * pip install pymongo
+ 
