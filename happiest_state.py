@@ -25,63 +25,68 @@ def main():
     # Print every (term, score) pair in the dictionary
     #print scores.items()
     
-    # lets define state centers, just pick closest one using diff of lat/long
-    stateCenters = {}
-    stateCenters['AK'] = {'lat':61.3850,'long':-152.2683}
-    stateCenters["AL"] = {'lat':32.7990,'long':-86.8073}
-    stateCenters["AR"] = {'lat':34.9513,'long':-92.3809}
-    stateCenters["AS"] = {'lat':14.2417,'long':-170.7197}
-    stateCenters["AZ"] = {'lat':33.7712,'long':-111.3877}
-    stateCenters["CA"] = {'lat':36.1700,'long':-119.7462}
-    stateCenters["CO"] = {'lat':39.0646,'long':-105.3272}
-    stateCenters["CT"] = {'lat':41.5834,'long':-72.7622}
-    stateCenters["DC"] = {'lat':38.8964,'long':-77.0262}
-    stateCenters["DE"] = {'lat':39.3498,'long':-75.5148}
-    stateCenters["FL"] = {'lat':27.8333,'long':-81.7170}
-    stateCenters["GA"] = {'lat':32.9866,'long':-83.6487}
-    stateCenters["HI"] = {'lat':21.1098,'long':-157.5311}
-    stateCenters["IA"] = {'lat':42.0046,'long':-93.2140}
-    stateCenters["ID"] = {'lat':44.2394,'long':-114.5103}
-    stateCenters["IL"] = {'lat':40.3363,'long':-89.0022}
-    stateCenters["IN"] = {'lat':39.8647,'long':-86.2604}
-    stateCenters["KS"] = {'lat':38.5111,'long':-96.8005}
-    stateCenters["KY"] = {'lat':37.6690,'long':-84.6514}
-    stateCenters["LA"] = {'lat':31.1801,'long':-91.8749}
-    stateCenters["MA"] = {'lat':42.2373,'long':-71.5314}
-    stateCenters["MD"] = {'lat':39.0724,'long':-76.7902}
-    stateCenters["ME"] = {'lat':44.6074,'long':-69.3977}
-    stateCenters["MI"] = {'lat':43.3504,'long':-84.5603}
-    stateCenters["MN"] = {'lat':45.7326,'long':-93.9196}
-    stateCenters["MO"] = {'lat':38.4623,'long':-92.3020}
-    stateCenters["MP"] = {'lat':14.8058,'long':145.5505}
-    stateCenters["MS"] = {'lat':32.7673,'long':-89.6812}
-    stateCenters["MT"] = {'lat':46.9048,'long':-110.3261}
-    stateCenters["NC"] = {'lat':35.6411,'long':-79.8431}
-    stateCenters["ND"] = {'lat':47.5362,'long':-99.7930}
-    stateCenters["NE"] = {'lat':41.1289,'long':-98.2883}
-    stateCenters["NH"] = {'lat':43.4108,'long':-71.5653}
-    stateCenters["NJ"] = {'lat':40.3140,'long':-74.5089}
-    stateCenters["NM"] = {'lat':34.8375,'long':-106.2371}
-    stateCenters["NV"] = {'lat':38.4199,'long':-117.1219}
-    stateCenters["NY"] = {'lat':42.1497,'long':-74.9384}
-    stateCenters["OH"] = {'lat':40.3736,'long':-82.7755}
-    stateCenters["OK"] = {'lat':35.5376,'long':-96.9247}
-    stateCenters["OR"] = {'lat':44.5672,'long':-122.1269}
-    stateCenters["PA"] = {'lat':40.5773,'long':-77.2640}
-    stateCenters["PR"] = {'lat':18.2766,'long':-66.3350}
-    stateCenters["RI"] = {'lat':41.6772,'long':-71.5101}
-    stateCenters["SC"] = {'lat':33.8191,'long':-80.9066}
-    stateCenters["SD"] = {'lat':44.2853,'long':-99.4632}
-    stateCenters["TN"] = {'lat':35.7449,'long':-86.7489}
-    stateCenters["TX"] = {'lat':31.1060,'long':-97.6475}
-    stateCenters["UT"] = {'lat':40.1135,'long':-111.8535}
-    stateCenters["VA"] = {'lat':37.7680,'long':-78.2057}
-    stateCenters["VI"] = {'lat':18.0001,'long':-64.8199}
-    stateCenters["VT"] = {'lat':44.0407,'long':-72.7093}
-    stateCenters["WA"] = {'lat':47.3917,'long':-121.5708}
-    stateCenters["WI"] = {'lat':44.2563,'long':-89.6385}
-    stateCenters["WV"] = {'lat':38.4680,'long':-80.9696}
-    stateCenters["WY"] = {'lat':42.7475,'long':-107.2085}
+    # list of states to use
+    states = [
+        'AL',
+        'AK',
+        'AS',
+        'AZ',
+        'AR',
+        'CA',
+        'CO',
+        'CT',
+        'DE',
+        'DC',
+        'FM',
+        'FL',
+        'GA',
+        'GU',
+        'HI',
+        'ID',
+        'IL',
+        'IN',
+        'IA',
+        'KS',
+        'KY',
+        'LA',
+        'ME',
+        'MH',
+        'MD',
+        'MA',
+        'MI',
+        'MN',
+        'MS',
+        'MO',
+        'MT',
+        'NE',
+        'NV',
+        'NH',
+        'NJ',
+        'NM',
+        'NY',
+        'NC',
+        'ND',
+        'MP',
+        'OH',
+        'OK',
+        'OR',
+        'PW',
+        'PA',
+        'PR',
+        'RI',
+        'SC',
+        'SD',
+        'TN',
+        'TX',
+        'UT',
+        'VT',
+        'VI',
+        'VA',
+        'WA',
+        'WV',
+        'WI',
+        'WY'
+    ]
     
     # keep track of hapiness by state
     state_hapiness = {}
@@ -188,8 +193,12 @@ def main():
     #print '\nCan we order and get top 10?'
     
     # lets try and print out 10 happiest states in order, in json
-    count = 1
     happyState = {}
+    count = 1
+    
+    # in with default values, unknown fill
+    for state in states:
+        happyState[state] = {'score':'NA','rank':'NA', 'fillKey':'UNKNOWN'}
     
     # set date and filename used, remove str when going straight to mongo
     happyState['parseDate'] = datetime.datetime.today()
@@ -215,7 +224,7 @@ def main():
         #    break
 
     #with open('happiest_states.json', 'w') as outfile:
-    #  json.dump(happyState, outfile)
+    #    json.dump(happyState, outfile)
     
     # insert into local mongo
     client = MongoClient('localhost', 27017)
