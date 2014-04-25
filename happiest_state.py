@@ -131,7 +131,7 @@ def main():
                     placeTypeStr = placeData['place_type'].encode('utf-8')
                     placeFillNameStr = placeData['full_name'].encode('utf-8')
                     
-                    if placeTypeStr == 'city':
+                    if (placeTypeStr == 'city' and (placeFillNameStr.find(",") != -1)):
                         city, state  = placeFillNameStr.split(",")
                         state = state.strip()
                     elif placeTypeStr == 'state':
