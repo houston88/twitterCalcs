@@ -264,7 +264,7 @@ def top_hashtags(filename):
 
                     if 'text' in hashtagsObj:
                         hashtag = hashtagsObj['text']
-                        hashtagStr = hashtag.encode('utf-8')
+                        hashtagStr = hashtag.encode('utf-8').lower()
                         #print hashtagStr
 
                         if hashtagStr in hash_counts:
